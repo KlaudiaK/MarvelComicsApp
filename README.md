@@ -22,7 +22,7 @@ On search screen you can explore the comics by typying title name.
 - <a href="https://m3.material.io/" target="_blank">Material 3</a>
 - **MVVM Architecture**   (View - DataBinding - ViewModel - Model)
 - <a href="https://dagger.dev/hilt/" target="_blank">Hilt</a> - dependency injection
-- <a href="https://github.com/square/retrofit" target="_blank">Retrofit2 & OkHttp3</a> - construct the REST APIs and paging network data.
+- <a href="https://github.com/square/retrofit" target="_blank">Retrofit2 & OkHttp3</a> - construct the REST APIs
 - <a href="https://coil-kt.github.io/coil/compose/" target="_blank">Coil</a> - image loading
 
 ## Jetpack Compose 
