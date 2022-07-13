@@ -15,23 +15,23 @@ fun NavHostComposable() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = "comic_list_screen"
+        startDestination = Screen.ComicList.route
     ) {
-        composable("comic_list_screen") {
+        composable(Screen.ComicList.route) {
             ComicListScreen(navController = navController)
         }
-        composable("comic_search_screen") {
+        composable(Screen.Search.route) {
             ComicSearchScreen(navController = navController)
         }
         composable(
-            "comic_detail_screen/{comicId}",
+            Screen.Detail.route,
             arguments = listOf(
-                navArgument("comicId") {
+                navArgument(Screen.COMIC_ID) {
                     type = NavType.StringType
                 }
             )
         ) { backStackEntry ->
-            backStackEntry.arguments?.getString("comicId")
+            backStackEntry.arguments?.getString(Screen.COMIC_ID)
                 ?.let {
                     ComicDetail(navController = navController, id = it)
                 }
