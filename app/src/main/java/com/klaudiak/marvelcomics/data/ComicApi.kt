@@ -1,6 +1,7 @@
 package com.klaudiak.marvelcomics.data
 
 import com.klaudiak.marvelcomics.BuildConfig
+import com.klaudiak.marvelcomics.data.ComicApi.Companion.API_KEY
 import com.klaudiak.marvelcomics.data.models.dto.ComicsDTO
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -9,7 +10,7 @@ interface ComicApi {
 
     companion object {
         const val BASE_URL = "https://gateway.marvel.com"
-        const val API_KEY = BuildConfig.API_KEY
+        const val API_KEY = BuildConfig.apiKey
         const val HASH = BuildConfig.hash
         const val TIMESTAMP = "1"
         const val LIMIT = "25"
