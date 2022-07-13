@@ -8,4 +8,6 @@
     <string name="marvel_comics">Marvel Comics</string>
     <string name="details">Details</string>
     <string name="written_by">Written by %1$s</string>
+    <string name="error_message">An unknown error occured.</string>
+    <string name="find_out_more">Find out more</string>
 </resources>

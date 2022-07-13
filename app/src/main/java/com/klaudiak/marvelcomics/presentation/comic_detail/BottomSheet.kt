@@ -19,6 +19,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -135,7 +136,7 @@ fun BottomSheet(comic: ComicItem) {
                         .align(Alignment.TopCenter),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red)
                 ) {
-                    Text("Find out more", color = Color.White)
+                    Text(stringResource(id = R.string.find_out_more), color = Color.White)
                 }
             }
 

@@ -28,7 +28,7 @@ class ComicRepository @Inject constructor(
                 }
                 comics
             } catch (e: Exception) {
-                emit(Resource.Error("An unknown error occurred."))
+                emit(Resource.Error(UNKNOWN_ERROR_MESSAGE))
                 null
             }
 
@@ -52,11 +52,11 @@ class ComicRepository @Inject constructor(
                 }
                 comics
             } catch (e: Exception) {
-                emit(Resource.Error("An unknown error occured."))
+                emit(Resource.Error(UNKNOWN_ERROR_MESSAGE))
                 null
             }
             if (response != null && response.isEmpty()) {
-                emit(Resource.Error("No data"))
+                emit(Resource.Error(NO_DATA_ERROR))
             } else {
                 emit(Resource.Success(response?.map { it.toComic() } ?: listOf()))
             }
@@ -75,7 +75,7 @@ class ComicRepository @Inject constructor(
             val response = try {
                 api.getComicInfo(id = id).data.results[0]
             } catch (e: Exception) {
-                emit(Resource.Error("An unknown error occured."))
+                emit(Resource.Error(UNKNOWN_ERROR_MESSAGE))
                 null
             }
             if (response != null) {
@@ -85,5 +85,10 @@ class ComicRepository @Inject constructor(
             emit(Resource.Loading(false))
 
         }
+    }
+
+    companion object {
+        const val UNKNOWN_ERROR_MESSAGE = "An unknown error occurred."
+        const val NO_DATA_ERROR = "No data"
     }
 }
