@@ -14,6 +14,7 @@ import androidx.compose.ui.focus.focusTarget
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -42,12 +43,12 @@ fun ComicSearchScreen(
         {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-
+                modifier = Modifier.padding(it)
                 ) {
                 Spacer(modifier = Modifier.height(20.dp))
                 Row {
                     SearchBar(
-                        hint = "Search for a comic book"
+                        hint = stringResource(id = R.string.search_bar_hint)
                     )
                 }
 
@@ -55,14 +56,13 @@ fun ComicSearchScreen(
                     Surface(modifier = Modifier.fillMaxSize(), color = Gray20) {
                         HintSearchBar()
                     }
-                } else if (uiState.value.query != "" && uiState.value.loadError == "No data") {
-                    Log.i("Results nooo", uiState.value.loadError.toString())
+                } else if (uiState.value.query != "" && uiState.value.loadError == stringResource(id = R.string.no_data_error)) {
                     Surface(modifier = Modifier.fillMaxSize(), color = Gray20) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.Center
                         ) {
-                            Text(text = "No results", fontSize = 38.sp)
+                            Text(text = stringResource(id = R.string.no_results), fontSize = 38.sp)
                         }
                     }
                 } else {
@@ -90,7 +90,7 @@ fun HintSearchBar() {
             contentDescription = null
         )
         Text(
-            text = "Start typing to find a particular comics",
+            text = stringResource(id = R.string.search_bar_screen_hint),
             fontWeight = FontWeight.SemiBold,
             fontSize = 24.sp,
             textAlign = TextAlign.Center
@@ -160,7 +160,7 @@ fun SearchBar(
                 onClick = { text = "" }, modifier = Modifier.padding(start = 6.dp)
 
             ) {
-                Text(text = "Cancel", fontSize = 18.sp, color = Color.Black)
+                Text(text = stringResource(id = R.string.cancel), fontSize = 18.sp, color = Color.Black)
             }
         }
 

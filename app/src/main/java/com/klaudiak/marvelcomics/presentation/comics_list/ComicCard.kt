@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -107,7 +108,7 @@ fun ComicCard(
                     )
 
                     Text(
-                        text = "witten by ${comic.author}",
+                        text = stringResource(id = R.string.written_by, comic.author),
                         modifier = Modifier
                             .padding(start = 8.dp, top = 6.dp),
                         color = Color.Gray,

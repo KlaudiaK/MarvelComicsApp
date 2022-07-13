@@ -3,8 +3,8 @@ package com.klaudiak.marvelcomics.presentation.bar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.klaudiak.marvelcomics.presentation.navigation.Screen
 
 sealed class BottomNavItem(
     val route: String,
