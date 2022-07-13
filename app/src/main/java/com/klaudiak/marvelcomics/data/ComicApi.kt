@@ -44,4 +44,5 @@ interface ComicApi {
         @Query("id") id: String
     ): ComicsDTO
 
+
 }
