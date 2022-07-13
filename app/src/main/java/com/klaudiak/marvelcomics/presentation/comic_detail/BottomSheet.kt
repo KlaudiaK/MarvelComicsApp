@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -57,15 +58,15 @@ fun BottomSheet(comic: ComicItem) {
     Log.i("HTML", description)
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
-        sheetShape = RoundedCornerShape(topStart = 36.dp, topEnd = 36.dp),
+        sheetShape = RoundedCornerShape(topStart = dimensionResource(id = R.dimen.bottom_sheet_shape), topEnd = dimensionResource(id = R.dimen.bottom_sheet_shape)),
         sheetContentColor = Color.Transparent,
-        sheetPeekHeight = 300.dp,
+        sheetPeekHeight = dimensionResource(id = R.dimen.bottom_sheet_peek_heigh),
         sheetContent = {
             Box(
                 Modifier
                     .fillMaxWidth()
-                    .height(20.dp)
-                    .padding(top = 8.dp)
+                    .height(dimensionResource(id = R.dimen.medium_box_heigh))
+                    .padding(top = dimensionResource(id = R.dimen.small_padding))
                     .background(Color.White),
                 contentAlignment = Alignment.TopCenter
             ) {
@@ -73,14 +74,14 @@ fun BottomSheet(comic: ComicItem) {
                     onClick = {
                         scope.launch { scaffoldState.bottomSheetState.collapse() }
                     },
-                    modifier = Modifier.height(12.dp),
+                    modifier = Modifier.height(dimensionResource(id = R.dimen.quite_small_padding)),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray)
                 ) {}
             }
             Box(
                 Modifier
                     .fillMaxWidth()
-                    .height(300.dp)
+                    .height(dimensionResource(id = R.dimen.bottom_sheet_peek_heigh))
                     .background(Color.Transparent),
                 contentAlignment = Alignment.TopCenter
             ) {
@@ -89,7 +90,7 @@ fun BottomSheet(comic: ComicItem) {
                         .fillMaxWidth()
                         .verticalScroll(columnScrollState)
                         .background(Color.Transparent)
-                        .padding(64.dp),
+                        .padding(dimensionResource(id = R.dimen.extra_extra_large_padding)),
                     horizontalAlignment = Alignment.Start
                 ) {
 
@@ -97,21 +98,21 @@ fun BottomSheet(comic: ComicItem) {
                         text = comic.title,
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Start,
-                        fontSize = 24.sp
+                        fontSize = dimensionResource(id = R.dimen.title_font_size).value.sp
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.small_spacer_heigh)))
                     Text(
                         text = comic.author,
                         fontWeight = FontWeight.SemiBold,
                         textAlign = TextAlign.Start,
-                        fontSize = 20.sp
+                        fontSize = dimensionResource(id = R.dimen.author_font_size).value.sp
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.small_spacer_heigh)))
                     Text(
                         text = description,
                         fontWeight = FontWeight.W300,
                         textAlign = TextAlign.Start,
-                        fontSize = 18.sp
+                        fontSize = dimensionResource(id = R.dimen.description_font_size).value.sp
                     )
                 }
 
@@ -121,7 +122,7 @@ fun BottomSheet(comic: ComicItem) {
             Box(
                 Modifier
                     .fillMaxWidth()
-                    .height(130.dp)
+                    .height(dimensionResource(id = R.dimen.extra_medium_box_heigh))
                     .padding(bottom = 40.dp)
                     .background(Color.White),
                 contentAlignment = Alignment.BottomCenter
@@ -132,7 +133,7 @@ fun BottomSheet(comic: ComicItem) {
                         uriHandler.openUri(comic.uriDetails)
                     },
                     modifier = Modifier
-                        .height(40.dp)
+                        .height(dimensionResource(id = R.dimen.large_bottom_heigh))
                         .align(Alignment.TopCenter),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red)
                 ) {

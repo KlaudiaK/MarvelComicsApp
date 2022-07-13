@@ -12,6 +12,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -101,7 +102,7 @@ fun ComicCard(
                         text = comic.title,
                         modifier = Modifier
 
-                            .padding(start = 8.dp, top = 6.dp),
+                            .padding(start = 8.dp, dimensionResource(id = R.dimen.small_padding)),
                         color = Color.Black,
                         fontWeight = FontWeight.W500,
                         fontSize = 21.sp
@@ -110,7 +111,7 @@ fun ComicCard(
                     Text(
                         text = stringResource(id = R.string.written_by, comic.author),
                         modifier = Modifier
-                            .padding(start = 8.dp, top = 6.dp),
+                            .padding(start = dimensionResource(id = R.dimen.small_padding), dimensionResource(id = R.dimen.extra_small_padding)),
                         color = Color.Gray,
                         fontWeight = FontWeight.W400,
                         fontSize = 16.sp
@@ -118,7 +119,7 @@ fun ComicCard(
                     Text(
                         text = description,
                         modifier = Modifier
-                            .padding(start = 8.dp, top = 6.dp, bottom = 6.dp),
+                            .padding(start = dimensionResource(id = R.dimen.small_padding), top = dimensionResource(id = R.dimen.extra_small_padding), bottom = dimensionResource(id = R.dimen.extra_small_padding)),
                         color = Color.DarkGray,
                         fontWeight = FontWeight.W300,
                         fontSize = 12.sp,
