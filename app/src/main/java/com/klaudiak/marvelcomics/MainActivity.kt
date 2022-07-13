@@ -24,6 +24,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val string = "Hello"
         setContent {
             MarvelComicsTheme(darkTheme = false, content = {
                 NavHostComposable()
