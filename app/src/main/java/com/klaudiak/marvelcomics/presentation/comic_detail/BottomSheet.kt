@@ -123,7 +123,7 @@ fun BottomSheet(comic: ComicItem) {
                 Modifier
                     .fillMaxWidth()
                     .height(dimensionResource(id = R.dimen.extra_medium_box_heigh))
-                    .padding(bottom = 40.dp)
+                    .padding(bottom = dimensionResource(id = R.dimen.large_bottom_heigh))
                     .background(Color.White),
                 contentAlignment = Alignment.BottomCenter
             ) {
