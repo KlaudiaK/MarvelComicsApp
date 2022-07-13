@@ -13,7 +13,9 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.focusTarget
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -42,32 +44,31 @@ fun ComicSearchScreen(
         {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-
+                modifier = Modifier.padding(it)
                 ) {
                 Spacer(modifier = Modifier.height(20.dp))
-                Row{
+                Row {
                     SearchBar(
-                        hint = "Search for a comic book"
+                        hint = stringResource(id = R.string.search_bar_hint)
                     )
                 }
 
-                if (uiState.value.searchedItems?.isEmpty() == true && uiState.value.query == ""){
-                    Surface(modifier = Modifier.fillMaxSize(),  color = Gray20) {
+                if (uiState.value.searchedItems?.isEmpty() == true && uiState.value.query == "") {
+                    Surface(modifier = Modifier.fillMaxSize(), color = Gray20) {
                         HintSearchBar()
                     }
-                }
-
-                else if(uiState.value.query != "" && uiState.value.loadError == "No data"){
-                    Log.i("Results nooo", uiState.value.loadError.toString())
+                } else if (uiState.value.query != "" && uiState.value.loadError == stringResource(id = R.string.no_data_error)) {
                     Surface(modifier = Modifier.fillMaxSize(), color = Gray20) {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
-                            Text(text = "No results", fontSize = 38.sp)
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            Text(text = stringResource(id = R.string.no_results), fontSize = dimensionResource(
+                                id = R.dimen.extra_large_font_size
+                            ).value.sp)
                         }
                     }
-                }
-
-
-                else{
+                } else {
                     ComicList(
                         comicList = uiState.value.searchedItems,
                         navController = navController
@@ -83,21 +84,21 @@ fun ComicSearchScreen(
 @Composable
 fun HintSearchBar() {
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.book_icon),
-                contentDescription = null
-            )
-            Text(
-                text = "Start typing to find a particular comics",
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 24.sp,
-                textAlign = TextAlign.Center
-            )
-        }
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Icon(
+            painter = painterResource(id = R.drawable.book_icon),
+            contentDescription = null
+        )
+        Text(
+            text = stringResource(id = R.string.search_bar_screen_hint),
+            fontWeight = FontWeight.SemiBold,
+            fontSize = dimensionResource(id = R.dimen.search_bar_hint_font_size).value.sp,
+            textAlign = TextAlign.Center
+        )
+    }
 }
 
 @Composable
@@ -114,55 +115,61 @@ fun SearchBar(
     }
     Row(
         modifier = Modifier
-            .padding(start = 8.dp, end = 8.dp)
+            .padding(
+                start = dimensionResource(id = R.dimen.small_padding),
+                end = dimensionResource(id = R.dimen.small_padding)
+            )
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.Start
-    ){
+    ) {
 
-    Box{
-        BasicTextField(
-            value = text,
-            onValueChange = {
-                text = it
-                viewModel.onEvent(SearchScreenEvent.OnQueryChanged(it))
-            },
-            maxLines = 1,
-            singleLine = true,
-            textStyle = TextStyle(color = Color.Black),
-            modifier = Modifier
-                .fillMaxWidth(
-                    if (text.isNotEmpty()) {
-                        0.7f
-                    } else {
-                        1f
-                    }
-                )
-                .shadow(5.dp, CircleShape)
-                .background(Color.White, CircleShape)
-                .padding(horizontal = 20.dp, vertical = 12.dp)
-                .onFocusChanged {
-                    isHintDisplayed = text.isEmpty()
-
-                }
-                .focusTarget()
-        )
-
-        androidx.compose.animation.AnimatedVisibility(visible = text.isEmpty()) {
-            Text(
-                text = hint,
-                color = Color.LightGray,
+        Box {
+            BasicTextField(
+                value = text,
+                onValueChange = {
+                    text = it
+                    viewModel.onEvent(SearchScreenEvent.OnQueryChanged(it))
+                },
+                maxLines = 1,
+                singleLine = true,
+                textStyle = TextStyle(color = Color.Black),
                 modifier = Modifier
-                    .padding(horizontal = 20.dp, vertical = 12.dp)
-            )
-        }
+                    .fillMaxWidth(
+                        if (text.isNotEmpty()) {
+                            0.7f
+                        } else {
+                            1f
+                        }
+                    )
+                    .shadow(5.dp, CircleShape)
+                    .background(Color.White, CircleShape)
+                    .padding(
+                        horizontal = dimensionResource(id = R.dimen.medium_padding),
+                        vertical = dimensionResource(id = R.dimen.quite_small_padding)
+                    )
+                    .onFocusChanged {
+                        isHintDisplayed = text.isEmpty()
 
-    }
+                    }
+                    .focusTarget()
+            )
+
+            androidx.compose.animation.AnimatedVisibility(visible = text.isEmpty()) {
+                Text(
+                    text = hint,
+                    color = Color.LightGray,
+                    modifier = Modifier
+                        .padding(horizontal = dimensionResource(id = R.dimen.medium_padding), vertical = dimensionResource(id = R.dimen.quite_small_padding))
+                )
+            }
+
+        }
         androidx.compose.animation.AnimatedVisibility(visible = text.isNotEmpty()) {
             TextButton(
-                onClick = { text = "" }, modifier = Modifier.padding(start = 6.dp)
+                onClick = { text = "" }, modifier = Modifier.padding(start = dimensionResource(id = R.dimen.extra_small_padding))
 
             ) {
-                Text(text = "Cancel", fontSize = 18.sp, color = Color.Black)
+                Text(text = stringResource(id = R.string.cancel), fontSize = dimensionResource(id = R.dimen.medium_font_size).value.sp, color = Color.Black)
             }
         }
 
