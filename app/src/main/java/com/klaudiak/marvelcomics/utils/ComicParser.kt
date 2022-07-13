@@ -7,21 +7,21 @@ fun Result.toComic(): ComicItem {
     return ComicItem(
         id = id,
         title = title,
-        author = if(creators.items.isNotEmpty()) {
+        author = if (creators.items.isNotEmpty()) {
             creators.items[0].name
         } else {
-               "Unknown"
+            "Unknown"
         },
         description = description ?: "",
-        thumbnail = if(images.isNotEmpty()) {
-            images[0].path +"."+ images[0].extension
+        thumbnail = if (images.isNotEmpty()) {
+            images[0].path + "." + images[0].extension
         } else {
             null
         },
-        uriDetails = if(urls.isNotEmpty()){
+        uriDetails = if (urls.isNotEmpty()) {
             urls[0].url
-        } else{
-                "https://www.marvel.com/comics?&options%5Boffset%5D=0&totalcount=12"
-            }
+        } else {
+            "https://www.marvel.com/comics?&options%5Boffset%5D=0&totalcount=12"
+        }
     )
 }

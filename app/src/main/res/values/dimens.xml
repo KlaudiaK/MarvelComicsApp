@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title_font_size">24sp</dimen>
+    <dimen name="small_padding">8.dp</dimen>
+    <dimen name="extra_small_padding">6.dp</dimen>
+    <dimen name="extra_large_font_size">38sp</dimen>
+    <dimen name="large_font_size">32sp</dimen>
+    <dimen name="medium_font_size">18sp</dimen>
+    <dimen name="small_spacer_heigh">8.dp</dimen>
+    <dimen name="bottom_sheet_shape">36.dp</dimen>
+    <dimen name="medium_box_heigh">20.dp</dimen>
+    <dimen name="extra_extra_large_padding">64.dp</dimen>
+    <dimen name="author_font_size">20sp</dimen>
+    <dimen name="description_font_size">18sp</dimen>
+    <dimen name="large_bottom_heigh">40.dp</dimen>
+    <dimen name="extra_medium_box_heigh">130.dp</dimen>
+    <dimen name="bottom_sheet_peek_heigh">300.dp</dimen>
+    <dimen name="quite_small_padding">12.dp</dimen>
+    <dimen name="medium_padding">20.dp</dimen>
+    <dimen name="search_bar_hint_font_size">24sp</dimen>
+</resources>

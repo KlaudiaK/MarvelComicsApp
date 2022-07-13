@@ -12,7 +12,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -23,22 +25,22 @@ import com.klaudiak.marvelcomics.R
 import com.klaudiak.marvelcomics.data.models.local.ComicItem
 
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ComicCard(
     navController: NavController,
     comic: ComicItem
-){
+) {
 
-    var isLoading by remember{ mutableStateOf(true) }
+    var isLoading by remember { mutableStateOf(true) }
     val image: String? = comic.thumbnail?.replace("http://", "https://")
-    val description: String = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-        Html.fromHtml(comic.description, Html.FROM_HTML_MODE_LEGACY).toString()
-        Html.fromHtml(comic.description, Html.FROM_HTML_MODE_COMPACT).toString()
-    } else {
-        Html.fromHtml(comic.description).toString()
-    }
+    val description: String =
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            Html.fromHtml(comic.description, Html.FROM_HTML_MODE_LEGACY).toString()
+            Html.fromHtml(comic.description, Html.FROM_HTML_MODE_COMPACT).toString()
+        } else {
+            Html.fromHtml(comic.description).toString()
+        }
 
 
     Card(
@@ -100,16 +102,16 @@ fun ComicCard(
                         text = comic.title,
                         modifier = Modifier
 
-                            .padding(start = 8.dp, top = 6.dp),
+                            .padding(start = 8.dp, dimensionResource(id = R.dimen.small_padding)),
                         color = Color.Black,
                         fontWeight = FontWeight.W500,
                         fontSize = 21.sp
                     )
 
                     Text(
-                        text = "witten by ${comic.author}",
+                        text = stringResource(id = R.string.written_by, comic.author),
                         modifier = Modifier
-                            .padding(start = 8.dp, top = 6.dp),
+                            .padding(start = dimensionResource(id = R.dimen.small_padding), dimensionResource(id = R.dimen.extra_small_padding)),
                         color = Color.Gray,
                         fontWeight = FontWeight.W400,
                         fontSize = 16.sp
@@ -117,7 +119,7 @@ fun ComicCard(
                     Text(
                         text = description,
                         modifier = Modifier
-                            .padding(start = 8.dp, top = 6.dp, bottom = 6.dp),
+                            .padding(start = dimensionResource(id = R.dimen.small_padding), top = dimensionResource(id = R.dimen.extra_small_padding), bottom = dimensionResource(id = R.dimen.extra_small_padding)),
                         color = Color.DarkGray,
                         fontWeight = FontWeight.W300,
                         fontSize = 12.sp,

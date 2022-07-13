@@ -13,7 +13,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
@@ -21,20 +20,22 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit() : Retrofit =
+    fun provideRetrofit(): Retrofit =
         Retrofit.Builder()
             .baseUrl(ComicApi.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(
                 OkHttpClient.Builder()
-                    .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC })
+                    .addInterceptor(HttpLoggingInterceptor().apply {
+                        level = HttpLoggingInterceptor.Level.BASIC
+                    })
                     .build()
             )
             .build()
 
     @Provides
     @Singleton
-    fun provideBooksApi(retrofit: Retrofit) : ComicApi =
+    fun provideBooksApi(retrofit: Retrofit): ComicApi =
         retrofit.create(ComicApi::class.java)
 
     @Singleton
