@@ -11,22 +11,26 @@ interface ComicApi {
         const val BASE_URL = "https://gateway.marvel.com"
         const val API_KEY = BuildConfig.API_KEY
         const val HASH = BuildConfig.hash
+        const val TIMESTAMP = "1"
+        const val LIMIT = "25"
+        const val OFFSET = "0"
+        const val ORDER_BY = "-onsaleDate"
     }
 
 
     @GET("/v1/public/comics")
     suspend fun getComics(
-        @Query("ts") timestamp: String = "1",
+        @Query("ts") timestamp: String = TIMESTAMP,
         @Query("apikey") apiKey: String = API_KEY,
         @Query("hash") hash: String = HASH,
-        @Query("limit") limit: String = "25",
-        @Query("offset") offset: String = "0",
-        @Query("orderBy") orderBy: String = "-onsaleDate"
+        @Query("limit") limit: String = LIMIT,
+        @Query("offset") offset: String = OFFSET,
+        @Query("orderBy") orderBy: String = ORDER_BY
     ): ComicsDTO
 
     @GET("/v1/public/comics")
     suspend fun getComicsByTitle(
-        @Query("ts") timestamp: String = "1",
+        @Query("ts") timestamp: String = TIMESTAMP,
         @Query("apikey") apiKey: String = API_KEY,
         @Query("hash") hash: String = HASH,
         @Query("title") title: String,
@@ -34,7 +38,7 @@ interface ComicApi {
 
     @GET("/v1/public/comics")
     suspend fun getComicInfo(
-        @Query("ts") timestamp: String = "1",
+        @Query("ts") timestamp: String = TIMESTAMP,
         @Query("apikey") apiKey: String = API_KEY,
         @Query("hash") hash: String = HASH,
         @Query("id") id: String
