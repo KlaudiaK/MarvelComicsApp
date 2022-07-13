@@ -8,6 +8,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
+import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -46,7 +47,7 @@ fun BottomSheet(comic: ComicItem) {
 
     val image: String? = comic.thumbnail?.replace("http://", "https://")
 
-    var description : String? = comic.description
+    var description: String? = comic.description
     description = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
         Html.fromHtml(comic.description, Html.FROM_HTML_MODE_LEGACY).toString()
     } else {
@@ -54,10 +55,10 @@ fun BottomSheet(comic: ComicItem) {
     }
     Log.i("HTML", description)
     BottomSheetScaffold(
-        scaffoldState= scaffoldState,
-        sheetShape = RoundedCornerShape(topStart = 36.dp, topEnd =36.dp),
+        scaffoldState = scaffoldState,
+        sheetShape = RoundedCornerShape(topStart = 36.dp, topEnd = 36.dp),
         sheetContentColor = Color.Transparent,
-        sheetPeekHeight= 300.dp,
+        sheetPeekHeight = 300.dp,
         sheetContent = {
             Box(
                 Modifier
@@ -81,7 +82,7 @@ fun BottomSheet(comic: ComicItem) {
                     .height(300.dp)
                     .background(Color.Transparent),
                 contentAlignment = Alignment.TopCenter
-            ){
+            ) {
                 Column(
                     Modifier
                         .fillMaxWidth()
@@ -91,11 +92,26 @@ fun BottomSheet(comic: ComicItem) {
                     horizontalAlignment = Alignment.Start
                 ) {
 
-                    Text(text = comic.title, fontWeight = FontWeight.Bold, textAlign = TextAlign.Start, fontSize = 24.sp)
+                    Text(
+                        text = comic.title,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Start,
+                        fontSize = 24.sp
+                    )
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text(text = comic.author, fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Start, fontSize = 20.sp)
+                    Text(
+                        text = comic.author,
+                        fontWeight = FontWeight.SemiBold,
+                        textAlign = TextAlign.Start,
+                        fontSize = 20.sp
+                    )
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text(text = description, fontWeight = FontWeight.W300, textAlign = TextAlign.Start, fontSize =18.sp)
+                    Text(
+                        text = description,
+                        fontWeight = FontWeight.W300,
+                        textAlign = TextAlign.Start,
+                        fontSize = 18.sp
+                    )
                 }
 
 
@@ -108,7 +124,7 @@ fun BottomSheet(comic: ComicItem) {
                     .padding(bottom = 40.dp)
                     .background(Color.White),
                 contentAlignment = Alignment.BottomCenter
-            ){
+            ) {
                 Button(
                     onClick = {
                         scope.launch { scaffoldState.bottomSheetState.collapse() }
@@ -125,7 +141,8 @@ fun BottomSheet(comic: ComicItem) {
 
         },
 
-    ) {
+        ) {
+
         Column {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)

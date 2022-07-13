@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ComicListViewModel @Inject constructor(
     private val comicRepository: ComicRepository
-) : ViewModel(){
+) : ViewModel() {
 
     private val _uiState = mutableStateOf(ComicListState())
     val uiState: State<ComicListState> = _uiState
@@ -24,21 +24,21 @@ class ComicListViewModel @Inject constructor(
     init {
         getComicList()
     }
-    private fun searchComicList(query: String = uiState.value.query.lowercase()){
+
+    private fun searchComicList(query: String = uiState.value.query.lowercase()) {
         _uiState.value = _uiState.value.copy(loadError = "")
         viewModelScope.launch {
 
-                comicRepository.searchComicList(query = query).collect{ res ->
-                when(res){
+            comicRepository.searchComicList(query = query).collect { res ->
+                when (res) {
                     is Resource.Loading -> {
                         _uiState.value = _uiState.value.copy(isLoading = true)
                     }
                     is Resource.Success -> {
                         _uiState.value = _uiState.value.copy(searchedItems = res.data)
-                        if(res.data?.isEmpty() == true){
+                        if (res.data?.isEmpty() == true) {
                             _uiState.value = _uiState.value.copy(noResults = true)
-                        }
-                        else{
+                        } else {
                             _uiState.value = _uiState.value.copy(noResults = false)
                         }
                         _uiState.value = _uiState.value.copy(isLoading = false)
@@ -56,11 +56,11 @@ class ComicListViewModel @Inject constructor(
     }
 
 
-    private fun getComicList(){
+    private fun getComicList() {
         viewModelScope.launch {
 
-            comicRepository.getComicList().collect{ res ->
-                when(res){
+            comicRepository.getComicList().collect { res ->
+                when (res) {
                     is Resource.Success -> {
                         _uiState.value = _uiState.value.copy(items = res.data)
                         _uiState.value = _uiState.value.copy(isLoading = false)
@@ -69,9 +69,9 @@ class ComicListViewModel @Inject constructor(
                         _uiState.value = _uiState.value.copy(isLoading = false)
                         _uiState.value = _uiState.value.copy(loadError = res.message)
                     }
-                   is Resource.Loading -> {
-                       _uiState.value = _uiState.value.copy(isLoading = true)
-                   }
+                    is Resource.Loading -> {
+                        _uiState.value = _uiState.value.copy(isLoading = true)
+                    }
                 }
             }
         }
@@ -93,20 +93,20 @@ class ComicListViewModel @Inject constructor(
 
     }
 
-    private fun checkIfQueryChanged(){
+    private fun checkIfQueryChanged() {
         viewModelScope.launch {
 
             val prevQuery = _uiState.value.query
             delay(3000)
-            if(prevQuery == _uiState.value.query){
+            if (prevQuery == _uiState.value.query) {
                 searchComicList(query = uiState.value.query)
             }
 
         }
     }
 
-    fun onEvent(event: SearchScreenEvent){
-        when(event){
+    fun onEvent(event: SearchScreenEvent) {
+        when (event) {
             is SearchScreenEvent.OnQueryChanged -> {
                 _uiState.value = _uiState.value.copy(query = event.query)
                 checkIfQueryChanged()

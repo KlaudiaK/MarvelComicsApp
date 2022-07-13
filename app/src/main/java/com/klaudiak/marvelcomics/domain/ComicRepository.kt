@@ -13,52 +13,51 @@ import javax.inject.Inject
 
 class ComicRepository @Inject constructor(
     private val api: ComicApi
-): ComicRepositoryInterface {
+) : ComicRepositoryInterface {
 
     override fun getComicList(): Flow<Resource<List<ComicItem>>> {
-           return flow{
-               emit(Resource.Loading(true))
-               val booksList = listOf<ComicItem>()
-               emit(Resource.Success(data = booksList))
-                   val response = try{
-                      val comics = mutableListOf<Result>()
-                      val responseComics = api.getComics().data.results
-                       responseComics.forEach{
-                           comics.add(it)
-                       }
-                      comics
-                   } catch (e: Exception) {
-                       emit( Resource.Error("An unknown error occurred."))
-                       null
-                   }
+        return flow {
+            emit(Resource.Loading(true))
+            val booksList = listOf<ComicItem>()
+            emit(Resource.Success(data = booksList))
+            val response = try {
+                val comics = mutableListOf<Result>()
+                val responseComics = api.getComics().data.results
+                responseComics.forEach {
+                    comics.add(it)
+                }
+                comics
+            } catch (e: Exception) {
+                emit(Resource.Error("An unknown error occurred."))
+                null
+            }
 
-               emit(Resource.Success(response?.map { it.toComic() } ?: listOf()))
+            emit(Resource.Success(response?.map { it.toComic() } ?: listOf()))
 
-               emit(Resource.Loading(false))
-               }
+            emit(Resource.Loading(false))
+        }
     }
 
     override fun searchComicList(query: String): Flow<Resource<List<ComicItem>>> {
-        return flow{
+        return flow {
             emit(Resource.Loading(true))
             val booksList = listOf<ComicItem>()
             emit(Resource.Success(data = booksList))
 
-                val response = try{
-                    val comics = mutableListOf<Result>()
-                    val responseComics =  api.getComicsByTitle(title = query).data.results
-                    responseComics.forEach{
-                        comics.add(it)
-                    }
-                    comics
-                } catch (e: Exception) {
-                    emit(Resource.Error("An unknown error occured."))
-                    null
+            val response = try {
+                val comics = mutableListOf<Result>()
+                val responseComics = api.getComicsByTitle(title = query).data.results
+                responseComics.forEach {
+                    comics.add(it)
                 }
+                comics
+            } catch (e: Exception) {
+                emit(Resource.Error("An unknown error occured."))
+                null
+            }
             if (response != null && response.isEmpty()) {
                 emit(Resource.Error("No data"))
-            }
-            else{
+            } else {
                 emit(Resource.Success(response?.map { it.toComic() } ?: listOf()))
             }
 
@@ -70,17 +69,17 @@ class ComicRepository @Inject constructor(
 
     override fun getComicInfo(id: String): Flow<Resource<ComicItem>> {
 
-        return flow{
+        return flow {
             emit(Resource.Loading(true))
 
             val response = try {
                 api.getComicInfo(id = id).data.results[0]
-            } catch( e: Exception) {
-                emit( Resource.Error("An unknown error occured."))
+            } catch (e: Exception) {
+                emit(Resource.Error("An unknown error occured."))
                 null
             }
             if (response != null) {
-                emit(Resource.Success(response.toComic() ))
+                emit(Resource.Success(response.toComic()))
             }
 
             emit(Resource.Loading(false))

@@ -11,7 +11,7 @@ import androidx.navigation.NavController
 import com.klaudiak.marvelcomics.ui.theme.White40
 
 @Composable
-fun TopAppBar(navController: NavController, text: String){
+fun TopAppBar(navController: NavController, text: String) {
     SmallTopAppBar(
         colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = White40),
         title = {

@@ -7,9 +7,9 @@ import retrofit2.http.Query
 
 interface ComicApi {
 
-    companion object{
+    companion object {
         const val BASE_URL = "https://gateway.marvel.com"
-        const val API_KEY = BuildConfig.apiKey
+        const val API_KEY = BuildConfig.API_KEY
         const val HASH = BuildConfig.hash
     }
 
@@ -22,7 +22,7 @@ interface ComicApi {
         @Query("limit") limit: String = "25",
         @Query("offset") offset: String = "0",
         @Query("orderBy") orderBy: String = "-onsaleDate"
-    ) : ComicsDTO
+    ): ComicsDTO
 
     @GET("/v1/public/comics")
     suspend fun getComicsByTitle(
@@ -30,14 +30,14 @@ interface ComicApi {
         @Query("apikey") apiKey: String = API_KEY,
         @Query("hash") hash: String = HASH,
         @Query("title") title: String,
-    ) : ComicsDTO
+    ): ComicsDTO
 
     @GET("/v1/public/comics")
     suspend fun getComicInfo(
         @Query("ts") timestamp: String = "1",
         @Query("apikey") apiKey: String = API_KEY,
         @Query("hash") hash: String = HASH,
-        @Query("id") id : String
-    ) : ComicsDTO
+        @Query("id") id: String
+    ): ComicsDTO
 
 }

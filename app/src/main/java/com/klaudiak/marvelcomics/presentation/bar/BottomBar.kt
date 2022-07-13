@@ -25,14 +25,17 @@ fun BottomNavigationBar(
         BottomNavItem.Search
     )
     NavigationBar(
-        modifier  = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth(),
         containerColor = Color.White,
         contentColor = Color.White
     ) {
-        items.forEach{ item ->
+        items.forEach { item ->
             NavigationBarItem(
                 icon = { Icon(item.icon, contentDescription = null) },
-               colors = NavigationBarItemDefaults.colors(selectedIconColor = Color.Red, indicatorColor = White40) ,
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = Color.Red,
+                    indicatorColor = White40
+                ),
                 selected = currentRoute == item.route,
                 onClick = {
                     navController.navigate(item.route) {

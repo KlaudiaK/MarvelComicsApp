@@ -22,7 +22,7 @@ import com.klaudiak.marvelcomics.ui.theme.White40
 fun ComicListScreen(
     navController: NavController,
     viewModel: ComicListViewModel = hiltViewModel<ComicListViewModel>()
-){
+) {
 
     val uiState = viewModel.uiState
 
@@ -30,11 +30,12 @@ fun ComicListScreen(
         topBar = {
             TopAppBar(navController = navController, text = "Marvel Comics")
         },
-        bottomBar ={
+        bottomBar = {
             BottomNavigationBar(navController = navController)
         },
-        contentColor = White40) {
-            ComicList(comicList = uiState.value.items, navController = navController)
+        contentColor = White40
+    ) {
+        ComicList(comicList = uiState.value.items, navController = navController)
     }
 
 }
@@ -43,7 +44,7 @@ fun ComicListScreen(
 fun ComicList(
     navController: NavController,
     comicList: List<ComicItem>? = listOf()
-){
+) {
 
     LazyColumn(
         modifier = Modifier.padding(top = 60.dp, bottom = 40.dp),

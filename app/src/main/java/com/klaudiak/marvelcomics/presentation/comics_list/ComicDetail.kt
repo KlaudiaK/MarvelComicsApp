@@ -22,10 +22,10 @@ fun ComicDetail(
     viewModel.getComicById(id)
     val comic = uiState.value.comic
 
-    Scaffold (
+    Scaffold(
         topBar = { TopAppBar(navController = navController, text = "Details") },
         bottomBar = { BottomNavigationBar(navController = navController) }
-    ){
+    ) {
         if (comic != null) {
             BottomSheet(comic = comic)
         }

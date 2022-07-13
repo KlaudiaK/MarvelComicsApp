@@ -23,22 +23,22 @@ import com.klaudiak.marvelcomics.R
 import com.klaudiak.marvelcomics.data.models.local.ComicItem
 
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ComicCard(
     navController: NavController,
     comic: ComicItem
-){
+) {
 
-    var isLoading by remember{ mutableStateOf(true) }
+    var isLoading by remember { mutableStateOf(true) }
     val image: String? = comic.thumbnail?.replace("http://", "https://")
-    val description: String = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-        Html.fromHtml(comic.description, Html.FROM_HTML_MODE_LEGACY).toString()
-        Html.fromHtml(comic.description, Html.FROM_HTML_MODE_COMPACT).toString()
-    } else {
-        Html.fromHtml(comic.description).toString()
-    }
+    val description: String =
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            Html.fromHtml(comic.description, Html.FROM_HTML_MODE_LEGACY).toString()
+            Html.fromHtml(comic.description, Html.FROM_HTML_MODE_COMPACT).toString()
+        } else {
+            Html.fromHtml(comic.description).toString()
+        }
 
 
     Card(

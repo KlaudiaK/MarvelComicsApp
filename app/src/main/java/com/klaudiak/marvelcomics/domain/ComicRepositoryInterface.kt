@@ -8,5 +8,5 @@ interface ComicRepositoryInterface {
 
     fun getComicList(): Flow<Resource<List<ComicItem>>>
     fun searchComicList(query: String): Flow<Resource<List<ComicItem>>>
-     fun getComicInfo(id: String) : Flow<Resource<ComicItem>>
+    fun getComicInfo(id: String): Flow<Resource<ComicItem>>
 }
