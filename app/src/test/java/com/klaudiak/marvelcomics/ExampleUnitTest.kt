@@ -37,7 +37,7 @@ import org.junit.Rule
 open class TestConfig {
 
     @ExperimentalCoroutinesApi
-    private val dispatcher = StandardTestDispatcher()
+    val dispatcher = StandardTestDispatcher()
 
     @get:Rule
     val rule = InstantTaskExecutorRule()

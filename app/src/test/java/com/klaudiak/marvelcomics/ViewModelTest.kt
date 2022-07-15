@@ -1,5 +1,6 @@
 package com.klaudiak.marvelcomics
 
+import androidx.lifecycle.viewModelScope
 import com.klaudiak.marvelcomics.data.models.local.ComicItem
 import com.klaudiak.marvelcomics.domain.ComicRepository
 import com.klaudiak.marvelcomics.presentation.comics_list.ComicListState
@@ -7,6 +8,8 @@ import com.klaudiak.marvelcomics.presentation.comics_list.ComicListViewModel
 import com.klaudiak.marvelcomics.presentation.search_screen.SearchScreenEvent
 import com.klaudiak.marvelcomics.utils.Resource
 import io.mockk.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
@@ -36,7 +39,7 @@ class ComicViewModelTest : TestConfig() {
 
     @Before
     fun before() {
-        comicRepository = mockk()
+        comicRepository = mockk(relaxed = true)
         viewModel = ComicListViewModel(comicRepository)
     }
 
@@ -105,5 +108,20 @@ class ComicViewModelTest : TestConfig() {
         } else if (getComicRes is Resource.Loading<*>) {
             assert(viewModel.uiState.value.isLoading)
         }
+    }
+
+
+    @Test
+    fun `Test search comic list when success`() {
+
+        coEvery { comicRepository.searchComicList(any()) } returns
+                flow {
+                    Resource.Success(data = listOf(comicItem))
+                }
+
+        viewModel.onEvent(SearchScreenEvent.OnQueryChanged("1"))
+        assert(viewModel.uiState.value.query == "1")
+        assertNotNull(viewModel.uiState.value.searchedItems)
+        assert(!viewModel.uiState.value.noResults)
     }
 }
