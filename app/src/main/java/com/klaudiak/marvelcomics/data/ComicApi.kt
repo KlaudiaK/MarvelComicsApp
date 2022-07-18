@@ -10,8 +10,8 @@ interface ComicApi {
 
     companion object {
         const val BASE_URL = "https://gateway.marvel.com"
-        const val API_KEY = BuildConfig.apiKey
-        const val HASH = BuildConfig.hash
+        const val API_KEY = "6e9f93910aec59d17b0f0ad5667807b3"
+        const val HASH = "0782f2a06cb81811b9652eb06e6c9ea0"
         const val TIMESTAMP = "1"
         const val LIMIT = "25"
         const val OFFSET = "0"

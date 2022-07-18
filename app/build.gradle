@@ -31,8 +31,8 @@ android {
             useSupportLibrary true
         }
 
-        buildConfigField "String", 'CREDENTIALS_API_KEY', System.getenv("CREDENTIALS_API_KEY") ?: localProperties["apiKey"]
-        buildConfigField "String", 'CREDENTIALS_HASH', System.getenv("CREDENTIALS_HASH") ?: localProperties["hash"]
+     //   buildConfigField "String", 'CREDENTIALS_API_KEY', System.getenv("CREDENTIALS_API_KEY") ?: localProperties["apiKey"]
+     //   buildConfigField "String", 'CREDENTIALS_HASH', System.getenv("CREDENTIALS_HASH") ?: localProperties["hash"]
     }
 
     buildTypes {
